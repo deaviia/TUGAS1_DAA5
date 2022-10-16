@@ -17,30 +17,37 @@ struct data
 };
 struct data maba[nmax]; // deklarasi variabel bertipe struct
 void tambah_data();     // prototype fungsi void
+void edit_data();
 void hapus_data();
 void tampilkan_data();
 main()
 {
     int pil;
 menu:
+	cout<< "=========== PROGRAM DATA ==========="<< endl;
+	cout << endl;
     cout << " \t\t MENU \n";
+   	cout<< "*************************************"<<endl;
     cout << "1. tambah data\n";
-    cout << "2. hapus data \n";
-    cout << "3. tampilkan data \n";
-    cout << "4. keluar \n";
-    cout << "\n Pilih menu (1/2/3/4) ? ";
+    cout << "2. edit data \n";
+    cout << "3. hapus data \n";
+    cout << "4. tampilkan data \n";
+    cout << "5. keluar \n";
+    cout << "\n Pilih Menu (1/2/3/4/5) ? ";
     cin >> pil;
     if (pil == 1)
         tambah_data();
     else if (pil == 2)
-        hapus_data();
+        edit_data();
     else if (pil == 3)
-        tampilkan_data();
+        hapus_data();
     else if (pil == 4)
+        tampilkan_data();
+    else if (pil == 5)
         exit(1); // atau bisa pakai return(0)
     else
     {
-        cout << "pilihan tak tersedia...!!!\n";
+        cout << "maaf,pilihan anda tidak tersedia...!!!\n";
     }
     goto menu;
     getch();
@@ -50,6 +57,7 @@ void tambah_data()
 {
     if (n < nmax)
     {
+    	
         cout << "nama : ";
         cin >> maba[n].nama;
         cout << "NIM : ";
@@ -59,12 +67,31 @@ void tambah_data()
         n++;
     }
     else
-        cout << "\n data telah melebihi...!!!\n maksimal data = " << nmax;
+        cout << "\n data telah melebihi batas...!!!\n maksimal data = " << nmax;
+}
+void edit_data()
+{
+    int a, b;
+		cout << "data pada index berapa yang ingin diedit? (1 s.d. 5) : ";
+		cin >> a;
+		b = a-1;
+	if (a < n)
+		cout << "\n data yang ingin diedit tidak ada...!!!\n";
+	else
+	{
+		cout << "nama : "; 
+		cin >> maba[b].nama;
+        cout << "NIM : "; 
+		cin >> maba[b].nim;
+        cout << "Kom : "; 
+		cin >> maba[b].kom;
+       
+	}
 }
 void hapus_data()
 {
     int x;
-    cout << "pilih data yang akan dihapus (1 s.d. 5) : ";
+    cout << "pilih data yang akan anda hapus (1 s.d. 5) : ";
     cin >> x;
     if (x < n && x > 0)
     {
@@ -81,8 +108,11 @@ void hapus_data()
     else
         cout << "\n data yang ingin dihapus tidak ada...!!!\n";
 }
+
+
 void tampilkan_data()
 {
+	
     if (n == 0)
         cout << "Tidak ada data yang disimpan...!!!\n";
     else
